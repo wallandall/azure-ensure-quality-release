@@ -1,0 +1,23 @@
+#Rename this file to terraform.tfvars
+#For security ensure this file is not commited to Source Control
+#add variables
+# Azure subscription vars
+subscription_id = ""
+client_id = ""
+client_secret = ""
+tenant_id = ""
+
+# Resource Group/Location
+location = "West Europe"
+resource_group = "qr-test"
+application_type = "WebApp"
+
+# Network
+virtual_network_name = "qr-test-vnet"
+address_space = ["10.0.0.0/16"]
+address_prefix_test = "10.0.1.0/24"
+
+#Virtual Machine
+vm_size="Standard_B1s" ##Set the required sizse to avoid cost
+vm_admin_username=""
+vm_password=""
