@@ -32,7 +32,7 @@ stages:
               provider: 'azurerm'
               command: 'init'
               workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test/'
-              backendServiceArm: 'terraform-sa'
+              backendServiceArm: 'TerraformSP'
               backendAzureRmResourceGroupName: 'tstate'
               backendAzureRmStorageAccountName: 'tstate8176'
               backendAzureRmContainerName: 'tstate'
@@ -51,7 +51,7 @@ stages:
               provider: 'azurerm'
               command: 'plan'
               workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test/'
-              environmentServiceNameAzureRM: 'terraform-sa'
+              environmentServiceNameAzureRM: 'TerraformSP'
 
           - task: TerraformTaskV1@0
             displayName: 'Terraform apply'
