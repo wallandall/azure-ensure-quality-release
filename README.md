@@ -46,13 +46,42 @@ To create the above resources run the below commands from ```terraform/environme
 1. Create a new Pipeline 
    1. Select GitHub
    2. Under "Configure your pipeline", select "Exisitng Azure Pipelines YAML File" and select the azure-pipeline.yaml file
-   3. 
+   3. Update the Storage account with the details created in Terraform Configuration
+      1. ``` backendAzureRmStorageAccountName: "tstate8176" ```
+   4. Add a new variable called "ARM_ACCESS_KEY" and add the generated key
+   5. Save Pipeline
+   6. Update the Test Environment
+      1. Select TEST under Environments
+      2. Select Add resource
+      3. Select Generic and Linux from the drop down menue
+      4. Copy the registration script and run it. 
+      5. After the registration script has successfuly run, click on close
+   7. Update Service Connection
+      1. Click on Project Settings
+      2. Select Sevice connection
+      3. Click New Service Connection
+      4. Select Service principle (automatic)
+      5. SelectSubscription
+         1. Subscription ID
+         2. The created resourtce group
+         3. Enter the Service Principal Account created in the Terraform Configuration
+      6. Save the service connection
+   8. Uplaod terraform.vars file to Secure files in Azure Devops
 
-   3. Create tasks to run Terraform
-   4. Run Tests for
+   9. Create tasks to run Terraform
+   10. Run Tests for
       -  Postman
       -  Selenium
       -  JMeter
 
-
-
+ToDo
+screenshot of the log output of Terraform when executed by the CI/CD pipeline
+screenshot of the successful execution of the pipeline build results page
+screenshot of the log output of JMeter when executed by the CI/CD pipeline 
+screenshot of the execution of the test suite by the CI/CD pipeline.
+Three screenshots of the Test Run Results from Postman shown in Azure DevOps.
+ One should be the Run Summary page (which contains 4 graphs), 
+ one should be of the Test Results page (which contains the test case titles from each test)
+ one should be of the output of the Publish Test Results step.
+ screenshots of the email received when the alert is triggered
+ screenshots of log analytics queries and result sets which will show specific output of the Azure resource

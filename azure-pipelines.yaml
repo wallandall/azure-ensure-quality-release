@@ -32,7 +32,7 @@ stages:
               provider: 'azurerm'
               command: 'init'
               workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test/'
-              backendServiceArm: 'terraform-sa'
+              backendServiceArm: 'TerraformSP'
               backendAzureRmResourceGroupName: 'tstate'
               backendAzureRmStorageAccountName: 'tstate8176'
               backendAzureRmContainerName: 'tstate'
@@ -51,7 +51,7 @@ stages:
               provider: 'azurerm'
               command: 'plan'
               workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test/'
-              environmentServiceNameAzureRM: 'terraform-sa'
+              environmentServiceNameAzureRM: 'TerraformSP'
 
           - task: TerraformTaskV1@0
             displayName: 'Terraform apply'
@@ -60,7 +60,7 @@ stages:
               command: 'apply'
               workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test/'
               commandOptions: '-auto-approve'
-              environmentServiceNameAzureRM: 'terraform-sa'
+              environmentServiceNameAzureRM: 'TerraformSP'
 
   - stage: 'Build'
     jobs:
@@ -113,7 +113,7 @@ stages:
                 - task: AzureWebApp@1
                   displayName: 'Deploy Azure WebApp'
                   inputs:
-                    azureSubscription: 'terraform-sa'
+                    azureSubscription: 'TerraformSP'
                     appType: 'webAppLinux'
                     appName: 'WebApplication-AppService'
                     package: '$(Pipeline.Workspace)/fakerestapi/fakerestapi-$(Build.BuildId).zip'
@@ -329,9 +329,9 @@ stages:
   #             provider: 'azurerm'
   #             command: 'init'
   #             workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test/'
-  #             backendServiceArm: 'terraform-sa'
+  #             backendServiceArm: 'TerraformSP'
   #             backendAzureRmResourceGroupName: 'tstate'
-  #             backendAzureRmStorageAccountName: 'tstate17968'
+  #             backendAzureRmStorageAccountName: 'tstate8176'
   #             backendAzureRmContainerName: 'tstate'
   #             backendAzureRmKey: 'terraform.tfstate'
 
@@ -341,4 +341,4 @@ stages:
   #             provider: 'azurerm'
   #             command: 'destroy'
   #             workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test/'
-  #             environmentServiceNameAzureRM: 'terraform-sa'
+  #             environmentServiceNameAzureRM: 'TerraformSP'
