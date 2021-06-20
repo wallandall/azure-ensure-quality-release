@@ -40,11 +40,16 @@ To create the above resources run the below commands from ```terraform/environme
 - ``` terraform init ``` Initializes the the directory containing the Terraform configuration files
 - ```terraform plan -out solution.plan ``` Creates an execution plan
 - ```terraform apply solution.plan ``` Executes the actions proposed in the Terraform plan
-- To destroy resources created by Terraform: terraform destroy
+- ** To destroy resources created by Terraform run ``` terraform destroy ```
 
 ## Implement Azure DevOps Pipeline
-   1. Create tasks to run Terraform
-   2. Run Tests for
+1. Create a new Pipeline 
+   1. Select GitHub
+   2. Under "Configure your pipeline", select "Exisitng Azure Pipelines YAML File" and select the azure-pipeline.yaml file
+   3. 
+
+   3. Create tasks to run Terraform
+   4. Run Tests for
       -  Postman
       -  Selenium
       -  JMeter
