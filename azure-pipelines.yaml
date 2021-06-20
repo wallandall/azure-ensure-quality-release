@@ -122,7 +122,7 @@ stages:
       - deployment: deploy_vm
         displayName: 'Deploy VM'
         environment:
-          name: 'Test'
+          name: 'TEST'
           resourceType: VirtualMachine
         strategy:
           runOnce:
