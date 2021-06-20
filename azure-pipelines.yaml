@@ -20,7 +20,7 @@ stages:
               targetType: 'inline'
               script: |
                 #!/bin/bash
-                sudo cp $(tfvars.secureFilePath) terraform/environments/test/terraform.tfvars
+                sudo cp $(tfvars.secureFilePath) terraform/environment/test/terraform.tfvars
           - task: TerraformInstaller@0
             displayName: 'Install Terraform'
             inputs:
@@ -31,7 +31,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'init'
-              workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test/'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test/'
               backendServiceArm: 'TerraformSP'
               backendAzureRmResourceGroupName: 'tstate'
               backendAzureRmStorageAccountName: 'tstate8176'
@@ -43,14 +43,14 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'validate'
-              workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test/'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test/'
 
           - task: TerraformTaskV1@0
             displayName: 'Terraform plan'
             inputs:
               provider: 'azurerm'
               command: 'plan'
-              workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test/'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test/'
               environmentServiceNameAzureRM: 'TerraformSP'
 
           - task: TerraformTaskV1@0
@@ -58,7 +58,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'apply'
-              workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test/'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test/'
               commandOptions: '-auto-approve'
               environmentServiceNameAzureRM: 'TerraformSP'
 
@@ -316,7 +316,7 @@ stages:
   #             targetType: "inline"
   #             script: |
   #               #!/bin/bash
-  #               sudo cp $(tfvars.secureFilePath) terraform/environments/test/terraform.tfvars
+  #               sudo cp $(tfvars.secureFilePath) terraform/environment/test/terraform.tfvars
 
   #         - task: TerraformInstaller@0
   #           displayName: "Install Terraform"
@@ -328,7 +328,7 @@ stages:
   #           inputs:
   #             provider: 'azurerm'
   #             command: 'init'
-  #             workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test/'
+  #             workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test/'
   #             backendServiceArm: 'TerraformSP'
   #             backendAzureRmResourceGroupName: 'tstate'
   #             backendAzureRmStorageAccountName: 'tstate8176'
@@ -340,5 +340,5 @@ stages:
   #           inputs:
   #             provider: 'azurerm'
   #             command: 'destroy'
-  #             workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test/'
+  #             workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test/'
   #             environmentServiceNameAzureRM: 'TerraformSP'
