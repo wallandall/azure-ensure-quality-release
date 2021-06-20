@@ -115,7 +115,7 @@ stages:
                   inputs:
                     azureSubscription: 'TerraformSP'
                     appType: 'webAppLinux'
-                    appName: 'wallandall-WebApplication-AppService'
+                    appName: 'WebApp-QR-CW-AppService'
                     package: '$(Pipeline.Workspace)/fakerestapi/fakerestapi-$(Build.BuildId).zip'
                     deploymentMethod: 'auto'
 
