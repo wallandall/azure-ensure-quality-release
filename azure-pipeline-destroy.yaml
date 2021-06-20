@@ -1,0 +1,46 @@
+name: Destroy Resources
+- stage: 'Destroy'
+  jobs:
+    - job: destroy_infrastructure
+      displayName: 'Destroy infrastructure'
+      pool:
+        vmimage: 'ubuntu-18.04'
+      steps:
+        - task: DownloadSecureFile@1
+          displayName: 'Download terraform.tfvars file'
+          name: tfvars
+          inputs:
+            secureFile: 'terraform.tfvars'
+
+        - task: Bash@3
+          displayName: 'Copy terraform.tfvars file'
+          inputs:
+            targetType: 'inline'
+            script: |
+              #!/bin/bash
+              sudo cp $(tfvars.secureFilePath) terraform/environment/test/terraform.tfvars
+
+        - task: TerraformInstaller@0
+          displayName: 'Install Terraform'
+          inputs:
+            terraformVersion: '0.14.11'
+
+        - task: TerraformTaskV1@0
+          displayName: 'Terraform init'
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test/'
+            backendServiceArm: 'TerraformSP'
+            backendAzureRmResourceGroupName: 'tstate'
+            backendAzureRmStorageAccountName: 'tstate8176'
+            backendAzureRmContainerName: 'tstate'
+            backendAzureRmKey: 'terraform.tfstate'
+
+        - task: TerraformTaskV1@0
+          displayName: 'Terraform destroy'
+          inputs:
+            provider: 'azurerm'
+            command: 'destroy'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test/'
+            environmentServiceNameAzureRM: 'TerraformSP'
