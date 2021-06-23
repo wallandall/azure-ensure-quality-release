@@ -128,26 +128,25 @@ stages:
           runOnce:
             deploy:
               steps:
-                - task: Bash@3
-                  displayName: 'Configure Selenium'
-                  inputs:
-                    targetType: 'inline'
-                    script: |
-                      #!/bin/bash
-                      sudo -n apt-get install software-properties-common -y
-                      sudo -n apt-add-repository universe -y
-                      sudo -n apt-get update -y
-                      sudo -n apt-get install python3-pip -y
-                      sudo -n apt-get install unzip -y
-                      sudo -n apt-get install -y chromium-browser
-                      sudo -n apt-get install -y chromium-chromedriver
-                      python3 -m pip install --upgrade pip
-                      pip3 install selenium
-                      python3 -V
-                      pip3 -V
-                      /usr/bin/chromium-browser --version
-                      /usr/bin/chromedriver --version
-                      python3 -c "import selenium; print('Selenium Version:', selenium.__version__)"
+                - bash: |
+                  pwd
+                  hostname
+                  uname -a
+                  cat /etc/*-release
+                  sudo -n apt-get install software-properties-common -y
+                  sudo -n apt-add-repository universe -y
+                  sudo -n apt-get update -y
+                  sudo -n apt-get install python3-pip -y
+                  sudo -n apt-get install unzip -y
+                  sudo -n apt-get install -y chromium-browser
+                  sudo -n apt-get install -y chromium-chromedriver
+                  python3 -m pip install --upgrade pip
+                  pip3 install selenium
+                  python3 -V
+                  pip3 -V
+                  /usr/bin/chromium-browser --version
+                  /usr/bin/chromedriver --version
+                  python3 -c "import selenium; print('Selenium Version:', selenium.__version__)"
   - stage: 'Test'
     jobs:
       - job: test_postman
