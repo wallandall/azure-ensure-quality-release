@@ -129,10 +129,6 @@ stages:
             deploy:
               steps:
               - bash: |
-                pwd
-                hostname
-                uname -a
-                cat /etc/*-release
                 sudo apt-get install software-properties-common -y
                 sudo apt-add-repository universe -y
                 sudo apt-get update -y
