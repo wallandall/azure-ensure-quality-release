@@ -134,13 +134,13 @@ stages:
                     targetType: 'inline'
                     script: |
                       #!/bin/bash
-                      sudo apt-get install software-properties-common -y
-                      sudo apt-add-repository universe -y
-                      sudo apt-get update -y
-                      sudo apt-get install python3-pip -y
-                      sudo apt-get install unzip -y
-                      sudo apt-get install -y chromium-browser
-                      sudo apt-get install -y chromium-chromedriver
+                      sudo -n apt-get install software-properties-common -y
+                      sudo -n apt-add-repository universe -y
+                      sudo -n apt-get update -y
+                      sudo -n apt-get install python3-pip -y
+                      sudo -n apt-get install unzip -y
+                      sudo -n apt-get install -y chromium-browser
+                      sudo -n apt-get install -y chromium-chromedriver
                       python3 -m pip install --upgrade pip
                       pip3 install selenium
                       python3 -V
